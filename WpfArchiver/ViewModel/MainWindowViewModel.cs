@@ -1,6 +1,8 @@
-﻿namespace WpfArchiver.ViewModel
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace WpfArchiver.ViewModel
 {
-    public class MainWindowViewModel
-    {
-    }
+  public class MainWindowViewModel : ObservableObject
+  {
+  }
 }
