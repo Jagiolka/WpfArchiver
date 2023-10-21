@@ -3,11 +3,40 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfArchiver"
-        xmlns:viewModels="clr-namespace:WpfArchiver"
+        xmlns:local="clr-namespace:WpfArchiver.View"
+        xmlns:viewModels="clr-namespace:WpfArchiver.ViewModel"
         mc:Ignorable="d"
-        Title="Archiver" Height="450" Width="800">
-    <Grid>
+        Background="LightGray"
+        Title="Archiver" Height="450" Width="1000">
 
-    </Grid>
+  <!--d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"-->
+  
+  <Window.DataContext>
+    <viewModels:MainWindowViewModel/>
+  </Window.DataContext>
+
+  <!--<Window.Resources>
+    <ResourceDictionary Source="../Ressources/SharedStyles.xaml"/>
+  </Window.Resources>-->
+
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="30" />
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="30" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="30" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="30" />
+    </Grid.RowDefinitions>
+
+    <ListView ItemsSource="{Binding ArchiveJobList}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <local:ArchiveJobItemTemplate DataContext="{Binding}"/>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </Grid>
 </Window>

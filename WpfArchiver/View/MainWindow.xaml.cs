@@ -22,7 +22,14 @@ namespace WpfArchiver
   {
     public MainWindow()
     {
-      InitializeComponent();
+      try
+      {
+        InitializeComponent();
+      }
+      catch (Exception ex) 
+      {
+        int i = 0; 
+      }
     }
   }
 }

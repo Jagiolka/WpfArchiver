@@ -8,22 +8,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Page Remove="Ressources\SharedStyles.xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Ressources\SharedStyles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
+    <Page Remove="View\SharedStyles.xaml" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WpfArchiver.Infrastructure\WpfArchiver.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Resources\SharedStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Page>
   </ItemGroup>
 
 </Project>
