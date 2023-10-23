@@ -1,41 +1,117 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using WpfArchiver.Infrastructure.BackgroundJobs;
-using static Quartz.Logging.OperationName;
-
-namespace WpfArchiver.ViewModel
+﻿namespace WpfArchiver.ViewModel
 {
+  using CommunityToolkit.Mvvm.ComponentModel;
+  using CommunityToolkit.Mvvm.DependencyInjection;
+  using CommunityToolkit.Mvvm.Input;
+  using Microsoft.Extensions.Logging;
+  using System.Collections.Generic;
+  using System.Windows;
+  using WpfArchiver.BusinessLogic;
+  using WpfArchiver.BackgroundJobs;
+  using WpfArchiver.Model;
+  using WpfArchiver.View;
+  using System;
+  using WpfArchiver.Ressources;
+  using System.Windows.Data;
+  using System.Collections.ObjectModel;
+  using System.Linq;
+
   public partial class MainWindowViewModel : ObservableObject
   {
     [ObservableProperty]
-    private IList<ArchiveJobItem> archiveJobList = new List<ArchiveJobItem>();
+    private ObservableCollection<ArchiveJobItem> archiveJobList = new ObservableCollection<ArchiveJobItem>();
 
     [ObservableProperty]
-    private ArchiveJobItem selectedArchiveJobItem = new ArchiveJobItem();
+    private ArchiveJobItem? selectedArchiveJobItem;
+
+    [ObservableProperty]
+    private string listViewFilter = string.Empty;
 
     public MainWindowViewModel()
     {
-      ArchiveJobList.Add(new ArchiveJobItem { Name = "TestJob1", IsActiveArchivJob = true, ArchiveType = "Zip", SourcePath = @"E:\tmp\5", TargetPath = @"E:\tmp\", NextArchiveJobExecutionDateTime = System.DateTime.Now.AddHours(1) });
-      ArchiveJobList.Add(new ArchiveJobItem { Name = "TestJob2", IsActiveArchivJob = false, ArchiveType = "7Zip", SourcePath = @"E:\tmp\6", TargetPath = @"E:\tamp\", NextArchiveJobExecutionDateTime = System.DateTime.Now.AddDays(1) });
+      var loadedItemList = JobSaveManager.Load();
+      foreach(var archiveJobItem in loadedItemList) 
+      {
+        this.ArchiveJobList.Add(archiveJobItem);
+      }
 
 
-      if(ArchiveJobList.Count > 0) 
+      //ArchiveJobList.Add = JobSaveManager.Load();
+      //CollectionViewSource.GetDefaultView(this.ArchiveJobs);
+
+      if (ArchiveJobList.Count > 0)
       {
         this.SelectedArchiveJobItem = ArchiveJobList[0];
       }
     }
 
     [RelayCommand]
-    private void ToggleIsActiveArchiveJob(ArchiveJobItem archiveJobItem)
+    private void AddNewArchiveJobItem()
+    {
+      ArchiveJobItem newArchiveJobItem = new();
+      this.OpenArchiveJobItemEditor(newArchiveJobItem, ConstantTexts.ArchiveJobItemEditorTitleAddNew);
+      this.ArchiveJobList.Add(newArchiveJobItem);
+    }
+
+    [RelayCommand(CanExecute = nameof(CanEditArchiveJobItem))]
+    private void EditArchiveJobItem(ArchiveJobItem archiveJobItem)
+    {
+      this.OpenArchiveJobItemEditor(archiveJobItem, ConstantTexts.ArchiveJobItemEditorTitleEdit);
+    }
+
+    [RelayCommand]
+    private void DeleteArchiveJobItem(ArchiveJobItem archiveJobItem)
+    {
+      if (archiveJobItem != null) 
+      {
+        this.ArchiveJobList.Remove(archiveJobItem);
+      }
+    }
+
+    [RelayCommand]
+    private void SaveArchiveJobList()
+    {
+      if (this.ArchiveJobList is not null)
+      {
+        JobSaveManager.Save(this.ArchiveJobList.ToList());
+      }
+    }
+
+    [RelayCommand]
+    private void CloseApplication()
+    {
+      var result = MessageBox.Show("Möchten Sie die Anwendung beenden?", "Beenden", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+      if (result == MessageBoxResult.Yes)
+      {
+        Application.Current.MainWindow.Close();
+      }
+    }
+
+    private bool CanEditArchiveJobItem()
+    {
+      return this.SelectedArchiveJobItem is not null;
+    }
+
+    private void OpenArchiveJobItemEditor(ArchiveJobItem archiveJobItem, string title) 
     {
       if (archiveJobItem != null)
       {
-        archiveJobItem.IsActiveArchivJob = !archiveJobItem.IsActiveArchivJob;
-      }
+        ArchiveJobItemEditorViewModel viewModel = new();
+        viewModel.ArchiveJobItem = archiveJobItem;
+        ArchiveJobItemEditorView view = new()
+        {
+          Title = title,
+          DataContext = viewModel,
+        };
 
-      this.OnPropertyChanged();
+        view.ShowDialog();
+
+        if(viewModel.IsSaveExit) 
+        {
+          archiveJobItem = viewModel.ArchiveJobItem;
+        }
+      }
     }
   }
 }

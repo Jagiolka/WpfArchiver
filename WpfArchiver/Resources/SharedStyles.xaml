@@ -2,30 +2,37 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-  <!--<Style x:Key="WindowBackground" TargetType="Window">
-    <Setter Property="Background" Value="LightGray" />
+  <!-- MainView -->
+
+  <Style x:Key="ListViewArchiveJobs" TargetType="ListView">
+    <Setter Property="Background" Value="WhiteSmoke" />
   </Style>
 
-  <Style x:Key="TextBoxArchiveJobItem" TargetType="TextBox">
-    <Setter Property="FontFamily" Value="Calibri" />
-    <Setter Property="FontSize" Value="24" />
-    <Setter Property="FontWeight" Value="Bold" />
-    <Setter Property="Foreground" Value="DarkBlue" />
+  <Style x:Key="ButtonStandard" TargetType="Button">
+    <Setter Property="Background" Value="SlateGray" />
+    <Setter Property="Padding" Value="3" />
+    <Setter Property="Margin" Value="2" />
+    <Setter Property="Height" Value="35" />
+    <Setter Property="Width" Value="90" />
+    <Setter Property="Foreground" Value="WhiteSmoke" />
+  </Style>
+
+  <Style x:Key="LabelStatus" TargetType="Label">
+    <Setter Property="Background" Value="WhiteSmoke" />
   </Style>
   
-  <Style x:Key="LabelArchiveJobItem" TargetType="Label">
+  <Style x:Key="TextBoxListViewFilter" TargetType="TextBox">
     <Setter Property="FontFamily" Value="Calibri" />
-    <Setter Property="FontSize" Value="24" />
-    <Setter Property="FontWeight" Value="Bold" />
-    <Setter Property="Foreground" Value="DarkBlue" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="FontStyle" Value="Italic" />
+    <Setter Property="Background" Value="WhiteSmoke" />
+    <Setter Property="Foreground" Value="Black" />
+    <Setter Property="Margin" Value="5" />
   </Style>
 
-  <Style x:Key="CheckArchiveJobActive" TargetType="CheckBox">
-    <Setter Property="FontFamily" Value="Calibri" />
-    <Setter Property="Foreground" Value="White" />
-    <Setter Property="Background" Value="Green" />
-    <Setter Property="FontSize" Value="16" />
-  </Style>-->
+  
+
+
 
 
   <!-- ArchiveJobItem -->
@@ -40,18 +47,94 @@
     <Setter Property="FontFamily" Value="Calibri" />
     <Setter Property="FontSize" Value="24" />
     <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="VerticalAlignment" Value="Center" />
   </Style>
 
   <Style x:Key="LabelArchiveJobItemHeader" TargetType="Label">
     <Setter Property="FontFamily" Value="Calibri" />
-    <Setter Property="FontSize" Value="18" />
+    <Setter Property="FontSize" Value="16" />
     <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="MinWidth" Value="175" />
   </Style>
 
   <Style x:Key="LabelArchiveJobItemValue" TargetType="Label">
     <Setter Property="FontFamily" Value="Calibri" />
-    <Setter Property="FontSize" Value="18" />
+    <Setter Property="FontSize" Value="16" />
     <Setter Property="FontStyle" Value="Italic" />
+    <Setter Property="MinWidth" Value="300" />
+  </Style>
+
+  <Style x:Key="ButtonArchiveJobItem" TargetType="Button">
+    <Setter Property="Width" Value="25" />
+    <Setter Property="Margin" Value="1" />
+  </Style>
+
+  <!-- ArchiveJobEditor -->
+  <Style x:Key="LabelArchiveJobEditor" TargetType="Label">
+    <Setter Property="FontFamily" Value="Calibri" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="Background" Value="SlateGray" />
+    <Setter Property="Foreground" Value="WhiteSmoke" />
+    <Setter Property="Margin" Value="5" />
+  </Style>
+
+  <Style x:Key="TextBoxArchiveJobEditor" TargetType="TextBox">
+    <Setter Property="FontFamily" Value="Calibri" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="FontStyle" Value="Italic" />
+    <Setter Property="Background" Value="WhiteSmoke" />
+    <Setter Property="Foreground" Value="Black" />
+    <Setter Property="Margin" Value="5" />
+  </Style>
+
+  <Style x:Key="ComboBoxArchiveJobEditor" TargetType="ComboBox">
+    <Setter Property="FontFamily" Value="Calibri" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="FontStyle" Value="Italic" />
+    <Setter Property="Background" Value="WhiteSmoke" />
+    <Setter Property="Foreground" Value="Black" />
+    <Setter Property="Margin" Value="5" />
+  </Style>  
+
+  <Style x:Key="LabelArchiveJobEditorCronExpressionNextTimes" TargetType="Label">
+    <Setter Property="FontFamily" Value="Calibri" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="FontWeight" Value="Bold" />
+    <Setter Property="Background" Value="CadetBlue" />
+    <Setter Property="Foreground" Value="WhiteSmoke" />
+    <Setter Property="Margin" Value="5" />
+  </Style>
+  
+
+  <Style x:Key="ButtonArchiveJobEditor" TargetType="Button">
+    <Setter Property="Background" Value="SlateGray" />
+    <Setter Property="Foreground" Value="WhiteSmoke" />
+    <Setter Property="Padding" Value="3" />
+    <Setter Property="Margin" Value="2" />
+    <Setter Property="Height" Value="50" />
+    <Setter Property="Width" Value="100" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+
+
+
+  <!-- Verwenden Sie einen Trigger, um den Hintergrund des Buttons abhängig vom Wert von Tag zu ändern -->
+  <Style x:Key="ButtonArchiveJobItemIsActive"  TargetType="{x:Type Button}">
+    <Style.Triggers>
+      <DataTrigger Binding="{Binding IsActiveArchivJob}" Value="True">
+        <Setter Property="Background" Value="Green"/>
+      </DataTrigger>
+      <DataTrigger Binding="{Binding IsActiveArchivJob}" Value="False">
+        <Setter Property="Background" Value="Red"/>
+      </DataTrigger>
+    </Style.Triggers>
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="White" />
+    <Setter Property="Margin" Value="5" />    
   </Style>
 
 

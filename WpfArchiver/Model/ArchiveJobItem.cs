@@ -1,25 +1,14 @@
-﻿namespace WpfArchiver.Infrastructure.BackgroundJobs;
+﻿namespace WpfArchiver.Model;
 
 using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using WpfArchiver.Infrastructure.BusinessObjects;
 
 public class ArchiveJobItem : ObservableObject
 {
-  private IList<ArchiveSetting> archiveSettings = new List<ArchiveSetting>();
-  private bool isActiveArchivJob;
+  private ArchiveSetting archiveSetting;
   private string name;
   private string sourcePath;
-  private string targetPath;  
-  private DateTime nextArchiveJobExecutionDateTime;
-
-  public bool IsActiveArchivJob
-  {
-    get => this.isActiveArchivJob;
-    set => SetProperty(ref this.isActiveArchivJob, value);
-  }
+  private string targetPath;
+  private string cronExpression;
 
   public string Name
   {
@@ -39,28 +28,15 @@ public class ArchiveJobItem : ObservableObject
     set => SetProperty(ref this.targetPath, value);
   }
 
-  public IList<ArchiveSetting> ArchiveSettings
+  public string CronExpression
   {
-    get => this.archiveSettings;
-    set => SetProperty(ref this.archiveSettings, value);
+    get => this.cronExpression;
+    set => SetProperty(ref this.cronExpression, value);
   }
 
-  public DateTime NextArchiveJobExecutionDateTime
+  public ArchiveSetting ArchiveSetting
   {
-    get => this.nextArchiveJobExecutionDateTime;
-    set => SetProperty(ref this.nextArchiveJobExecutionDateTime, value);
+    get => this.archiveSetting;
+    set => SetProperty(ref this.archiveSetting, value);
   }
-
-  public string GetArchiveSettings() 
-  {
-    string ttt = string.Empty;
-    foreach (var archiveSetting in ArchiveSettings) 
-    {
-      ttt += archiveSetting.ToString();
-    }
-
-    return ttt;
-  }
-
-  // < ProgressBar Height="2" Width="Auto" Value="{Binding WorkingProgressInPercent}" />
 }

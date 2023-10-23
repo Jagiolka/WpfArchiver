@@ -1,7 +1,9 @@
 ﻿<UserControl x:Class="WpfArchiver.View.ArchiveJobItemTemplate"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:WpfArchiver.View">
+             xmlns:local="clr-namespace:WpfArchiver"
+             xmlns:view="clr-namespace:WpfArchiver.View"
+             Background="LightSteelBlue">
 
   <UserControl.DataContext>
     <Binding/>
@@ -14,54 +16,35 @@
         <RowDefinition Height="30" />
         <RowDefinition Height="30" />
         <RowDefinition Height="30" />
-        <RowDefinition Height="30" />
+        <RowDefinition Height="10" />
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="10" />
-        <ColumnDefinition Width="150*" />
+        <ColumnDefinition Width="175" />
         <ColumnDefinition Width="650*" />
-        <ColumnDefinition Width="100" />
+        <ColumnDefinition Width="35" />
+        <ColumnDefinition Width="35" />
+        <ColumnDefinition Width="35" />
       </Grid.ColumnDefinitions>
 
-      <Label Content="{Binding Name}" Grid.Row="0" Grid.Column="1" Style="{StaticResource LabelArchiveJobItemName}" />        
-    
-      <Button Content="Drück mich"
-              Command="{Binding DataContext.ToggleIsActiveArchiveJobCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
-              CommandParameter="{Binding}" Tag="{Binding IsArchiveJobActive}"
-              Grid.Row="0" Grid.Column="3" 
-              FontSize="18" FontFamily="Calibri" 
-              Width="100" Height="60" BorderThickness="0">
-        <Button.Style>
-          <!-- Verwenden Sie einen Trigger, um den Hintergrund des Buttons abhängig vom Wert von Tag zu ändern -->
-          <Style TargetType="{x:Type Button}">
-            <Style.Triggers>
-              <DataTrigger Binding="{Binding IsActiveArchivJob}" Value="True">
-                <!-- Setzen Sie den Hintergrund auf Grün, wenn IsActiveArchivJob = True ist -->
-                <Setter Property="Background" Value="Green"/>
-              </DataTrigger>
-              <DataTrigger Binding="{Binding IsActiveArchivJob}" Value="False">
-                <!-- Setzen Sie den Hintergrund auf Rot, wenn IsActiveArchivJob = False ist -->
-                <Setter Property="Background" Value="Red"/>
-              </DataTrigger>
-            </Style.Triggers>
-          </Style>
-        </Button.Style>
-      </Button>
+      <Label Content="{Binding Name}" Grid.Row="0" Grid.Column="1" Style="{StaticResource LabelArchiveJobItemName}" />
 
       <Label Content="Quellpfad:"           Grid.Row="1" Grid.Column="1" Style="{StaticResource LabelArchiveJobItemHeader}" />
-      <Label Content="{Binding SourcePath}" Grid.Row="1" Grid.Column="2" Style="{StaticResource LabelArchiveJobItemValue}" Width="650" />
+      <Label Content="{Binding SourcePath}" Grid.Row="1" Grid.Column="2" Style="{StaticResource LabelArchiveJobItemValue}" />
+      <Button Command="{Binding EditArchiveJobItemCommand}" CommandParameter="{Binding Path=.}"
+        Grid.Row="1" Grid.Column="4" Style="{StaticResource ButtonArchiveJobItem}">
+        <Image Source="../Resources/Icons/Edit_32xMD.png" ToolTip="Archivierungsjob Bearbeiten" />
+      </Button>
+
+      <Button Grid.Row="1" Grid.Column="5" Style="{StaticResource ButtonArchiveJobItem}">
+        <Image Source="../Resources/Icons/Cancel_64x.png" ToolTip="Archivierungsjob löschen" Stretch="Fill" Width="20" />
+      </Button>
 
       <Label Content="Zielpfad:"           Grid.Row="2" Grid.Column="1" Style="{StaticResource LabelArchiveJobItemHeader}" />
       <Label Content="{Binding SourcePath}" Grid.Row="2" Grid.Column="2" Style="{StaticResource LabelArchiveJobItemValue}" />
 
       <Label Content="Einstellungen:"       Grid.Row="3" Grid.Column="1" Style="{StaticResource LabelArchiveJobItemHeader}" />
-      <Label Content="{Binding IsActiveArchivJob}"       Grid.Row="3" Grid.Column="2" Style="{StaticResource LabelArchiveJobItemValue}" />
-      
-      
-
-      <!--    
-      <ProgressBar Height="2" Width="Auto" Value="{Binding WorkingProgressInPercent}" />
-      -->
+      <Label Content="{Binding ArchiveSetting}"       Grid.Row="3" Grid.Column="2" Style="{StaticResource LabelArchiveJobItemValue}" />
       
     </Grid>
   </Border>
