@@ -79,8 +79,6 @@ public partial class ArchiveJobItemEditorViewModel : ObservableObject
 
   public bool IsSaveExit { get; set; }
 
-
-  //TODO: Saveable nur wenn alle Felder gesetzt wurden
   [RelayCommand]
   private void SaveExit(Window window)
   {

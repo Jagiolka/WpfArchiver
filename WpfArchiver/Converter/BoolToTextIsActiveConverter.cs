@@ -6,6 +6,7 @@ using System.Windows.Data;
 
 public class BoolToTextIsActiveConverter : IValueConverter
 {
+  // Todo: wurde erstmal rausgenommen, kommt später
   public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
   {
     if (value is bool b)

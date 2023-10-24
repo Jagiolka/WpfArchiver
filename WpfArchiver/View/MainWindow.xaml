@@ -26,16 +26,6 @@
       <RowDefinition Height="45" />
       <RowDefinition Height="30" />
     </Grid.RowDefinitions>
-    
-    <!--<TextBox Text="{Binding ListViewFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxListViewFilter}" Grid.Column="1" Grid.Row="1" />-->
-
-    <!--<TextBox Style="{StaticResource TextBoxListViewFilter}" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap">    
-      <Binding Path="DoubleProperty">
-        <Binding.ValidationRules>
-          <validationrules:NumberValidationRule/>
-        </Binding.ValidationRules>
-      </Binding>
-    </TextBox.Text>-->
 
     <!--<Border BorderThickness="1" BorderBrush="Black">-->
     <ListView ItemsSource="{Binding ArchiveJobList}"  SelectedItem="{Binding SelectedArchiveJobItem}"

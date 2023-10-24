@@ -1,18 +1,12 @@
 ﻿namespace WpfArchiver.ViewModel
 {
   using CommunityToolkit.Mvvm.ComponentModel;
-  using CommunityToolkit.Mvvm.DependencyInjection;
   using CommunityToolkit.Mvvm.Input;
-  using Microsoft.Extensions.Logging;
-  using System.Collections.Generic;
   using System.Windows;
   using WpfArchiver.BusinessLogic;
-  using WpfArchiver.BackgroundJobs;
   using WpfArchiver.Model;
   using WpfArchiver.View;
-  using System;
   using WpfArchiver.Ressources;
-  using System.Windows.Data;
   using System.Collections.ObjectModel;
   using System.Linq;
 
@@ -34,10 +28,6 @@
       {
         this.ArchiveJobList.Add(archiveJobItem);
       }
-
-
-      //ArchiveJobList.Add = JobSaveManager.Load();
-      //CollectionViewSource.GetDefaultView(this.ArchiveJobs);
 
       if (ArchiveJobList.Count > 0)
       {

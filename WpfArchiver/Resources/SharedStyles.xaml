@@ -3,7 +3,6 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
   <!-- MainView -->
-
   <Style x:Key="ListViewArchiveJobs" TargetType="ListView">
     <Setter Property="Background" Value="WhiteSmoke" />
   </Style>
@@ -29,14 +28,8 @@
     <Setter Property="Foreground" Value="Black" />
     <Setter Property="Margin" Value="5" />
   </Style>
-
   
-
-
-
-
   <!-- ArchiveJobItem -->
-
   <Style x:Key="BorderArchiveJobItem" TargetType="Border">
     <Setter Property="BorderBrush" Value="Black" />
     <Setter Property="BorderThickness" Value="1" />
@@ -68,6 +61,21 @@
   <Style x:Key="ButtonArchiveJobItem" TargetType="Button">
     <Setter Property="Width" Value="25" />
     <Setter Property="Margin" Value="1" />
+  </Style>
+
+  <Style x:Key="ButtonArchiveJobItemIsActive"  TargetType="{x:Type Button}">
+    <Style.Triggers>
+      <DataTrigger Binding="{Binding IsActiveArchivJob}" Value="True">
+        <Setter Property="Background" Value="Green"/>
+      </DataTrigger>
+      <DataTrigger Binding="{Binding IsActiveArchivJob}" Value="False">
+        <Setter Property="Background" Value="Red"/>
+      </DataTrigger>
+    </Style.Triggers>
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Foreground" Value="White" />
+    <Setter Property="Margin" Value="5" />
   </Style>
 
   <!-- ArchiveJobEditor -->
@@ -106,7 +114,6 @@
     <Setter Property="Foreground" Value="WhiteSmoke" />
     <Setter Property="Margin" Value="5" />
   </Style>
-  
 
   <Style x:Key="ButtonArchiveJobEditor" TargetType="Button">
     <Setter Property="Background" Value="SlateGray" />
@@ -118,24 +125,5 @@
     <Setter Property="HorizontalAlignment" Value="Center" />
     <Setter Property="VerticalAlignment" Value="Center" />
   </Style>
-
-
-
-  <!-- Verwenden Sie einen Trigger, um den Hintergrund des Buttons abhängig vom Wert von Tag zu ändern -->
-  <Style x:Key="ButtonArchiveJobItemIsActive"  TargetType="{x:Type Button}">
-    <Style.Triggers>
-      <DataTrigger Binding="{Binding IsActiveArchivJob}" Value="True">
-        <Setter Property="Background" Value="Green"/>
-      </DataTrigger>
-      <DataTrigger Binding="{Binding IsActiveArchivJob}" Value="False">
-        <Setter Property="Background" Value="Red"/>
-      </DataTrigger>
-    </Style.Triggers>
-    <Setter Property="HorizontalAlignment" Value="Center" />
-    <Setter Property="VerticalAlignment" Value="Center" />
-    <Setter Property="Foreground" Value="White" />
-    <Setter Property="Margin" Value="5" />    
-  </Style>
-
-
+  
 </ResourceDictionary>

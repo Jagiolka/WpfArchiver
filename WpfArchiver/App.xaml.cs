@@ -1,36 +1,49 @@
-﻿namespace WpfArchiver
+﻿namespace WpfArchiver;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System;
+using System.Windows;
+using WpfArchiver.View;
+using WpfArchiver.ViewModel;
+
+public partial class App : Application
 {
-  using Microsoft.Extensions.DependencyInjection;
-  using System.Windows;
-  using WpfArchiver.ViewModel;
+  private readonly IHost _host;
 
-  /// <summary>
-  /// Interaction logic for App.xaml
-  /// </summary>
-  public partial class App : Application
+  public App() 
   {
-    private readonly ServiceProvider _serviceProvider;
+    _host = Host.CreateDefaultBuilder()
+              .ConfigureServices((context, services) =>
+              {
+                // views
+                services.AddSingleton<MainWindow>(provider => new MainWindow
+                {
+                  DataContext = provider.GetRequiredService<MainWindowViewModel>()
+                });
+                services.AddTransient<ArchiveJobItemEditorView>();
 
-    public App() 
+                // viewModels
+                services.AddTransient<MainWindowViewModel>();
+                services.AddTransient<ArchiveJobItemEditorViewModel>();
+              })
+              .Build();
+  }
+
+  protected override async void OnStartup(StartupEventArgs e)
+  {
+    await _host.StartAsync();
+
+    var mainWindow = _host.Services.GetRequiredService<MainWindow>();
+    mainWindow.Show();
+  }
+
+  protected override async void OnExit(ExitEventArgs e)
+  {
+    using (_host)
     {
-      IServiceCollection services = new ServiceCollection();
-
-      // views
-      services.AddSingleton<MainWindow>(provider => new MainWindow
-      {
-        DataContext = provider.GetRequiredService<MainWindowViewModel>()
-      });
-
-      // viewModels
-      services.AddSingleton<MainWindowViewModel>();
-
-      _serviceProvider = services.BuildServiceProvider();
+      await _host.StopAsync(TimeSpan.FromSeconds(5));
     }
-    protected override void OnStartup(StartupEventArgs e)
-    {
-      var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-      mainWindow.Show();
-      base.OnStartup(e);
-    }
+    base.OnExit(e);
   }
 }
