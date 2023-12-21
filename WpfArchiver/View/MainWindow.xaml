@@ -7,43 +7,36 @@
         xmlns:viewModels="clr-namespace:WpfArchiver.ViewModel"
         mc:Ignorable="d"
         Background="WhiteSmoke"
-        Title="Archiver" Height="450" Width="1000">
+        Title="Archiver" Height="600" Width="1000">
 
-  <Window.DataContext>
-    <viewModels:MainWindowViewModel/>
-  </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="45" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
 
-  <Grid>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="30" />
-      <ColumnDefinition Width="*" />
-      <ColumnDefinition Width="30" />
-    </Grid.ColumnDefinitions>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="30" />
-      <RowDefinition Height="30" />
-      <RowDefinition Height="*" />
-      <RowDefinition Height="45" />
-      <RowDefinition Height="30" />
-    </Grid.RowDefinitions>
-
-    <!--<Border BorderThickness="1" BorderBrush="Black">-->
-    <ListView ItemsSource="{Binding ArchiveJobList}"  SelectedItem="{Binding SelectedArchiveJobItem}"
-                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="2" 
-                Style="{StaticResource ListViewArchiveJobs}" HorizontalContentAlignment="Stretch">
-      <ListView.ItemTemplate>
-          <DataTemplate>
-            <local:ArchiveJobItemTemplate DataContext="{Binding}" />
-          </DataTemplate>
-        </ListView.ItemTemplate>
-      </ListView>
-    <!--</Border>-->
-
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="3">
-      <Label Style="{StaticResource LabelStatus}" />
-      <Button Content="Neu" Command="{Binding AddNewArchiveJobItemCommand }" Style="{StaticResource ButtonStandard}" />
-      <Button Content="Save" Command="{Binding SaveArchiveJobListCommand }" Style="{StaticResource ButtonStandard}" />
-      <Button Content="Exit" Command="{Binding CloseApplicationCommand}" Style="{StaticResource ButtonStandard}" />
-    </StackPanel>
-  </Grid>
+        <ListView Name="ListViewArchiveJobs" Grid.Column="1" Grid.Row="2"
+              ItemsSource="{Binding ArchiveJobList}"  SelectedItem="{Binding SelectedArchiveJobItem}" 
+              Style="{StaticResource ListViewArchiveJobs}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <local:ArchiveJobItemTemplate DataContext="{Binding}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="3">
+            <Label Style="{StaticResource LabelStatus}" />
+            <Button Content="Neu" Command="{Binding AddNewArchiveJobItemCommand }" Style="{StaticResource ButtonStandard}" />
+            <Button Content="Save" Command="{Binding SaveArchiveJobListCommand }" Style="{StaticResource ButtonStandard}" />
+            <Button Content="Exit" Command="{Binding CloseApplicationCommand}" Style="{StaticResource ButtonStandard}" />
+        </StackPanel>
+    </Grid>
 </Window>

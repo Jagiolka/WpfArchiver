@@ -2,7 +2,7 @@
 
 public enum ArchiveSetting
 {
-  None,
-  ArchiveInZip,
-  DeleteAfterArchive,
+    None,
+    ArchiveInZip,
+    DeleteAfterArchive,
 }

@@ -3,49 +3,51 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:WpfArchiver"
              xmlns:view="clr-namespace:WpfArchiver.View"
-             Background="LightSteelBlue">
+             Background="LightSteelBlue"
+             x:Name="_window">
 
-  <UserControl.DataContext>
-    <Binding/>
-  </UserControl.DataContext>
+    <UserControl.DataContext>
+        <Binding/>
+    </UserControl.DataContext>
 
-  <Border Style="{StaticResource BorderArchiveJobItem}">
-    <Grid>
-      <Grid.RowDefinitions>
-        <RowDefinition Height="40" />
-        <RowDefinition Height="30" />
-        <RowDefinition Height="30" />
-        <RowDefinition Height="30" />
-        <RowDefinition Height="10" />
-      </Grid.RowDefinitions>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="10" />
-        <ColumnDefinition Width="175" />
-        <ColumnDefinition Width="650*" />
-        <ColumnDefinition Width="35" />
-        <ColumnDefinition Width="35" />
-        <ColumnDefinition Width="35" />
-      </Grid.ColumnDefinitions>
+    <Border Style="{StaticResource BorderArchiveJobItem}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="10" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="175" />
+                <ColumnDefinition Width="650*" />
+                <ColumnDefinition Width="35" />
+                <ColumnDefinition Width="35" />
+                <ColumnDefinition Width="35" />
+            </Grid.ColumnDefinitions>
 
-      <Label Content="{Binding Name}" Grid.Row="0" Grid.Column="1" Style="{StaticResource LabelArchiveJobItemName}" />
+            <Label Content="{Binding Name}" Grid.Row="0" Grid.Column="1" Style="{StaticResource LabelArchiveJobItemName}" />
 
-      <Label Content="Quellpfad:"           Grid.Row="1" Grid.Column="1" Style="{StaticResource LabelArchiveJobItemHeader}" />
-      <Label Content="{Binding SourcePath}" Grid.Row="1" Grid.Column="2" Style="{StaticResource LabelArchiveJobItemValue}" />
-      <Button Command="{Binding EditArchiveJobItemCommand}" CommandParameter="{Binding Path=.}"
+            <Label Content="Quellpfad:"           Grid.Row="1" Grid.Column="1" Style="{StaticResource LabelArchiveJobItemHeader}" />
+            <Label Content="{Binding SourcePath}" Grid.Row="1" Grid.Column="2" Style="{StaticResource LabelArchiveJobItemValue}" />
+            <Button Command="{Binding ElementName=ListViewArchiveJobs, Path=DataContext.EditArchiveJobItemCommand}" CommandParameter="{Binding .}"
         Grid.Row="1" Grid.Column="4" Style="{StaticResource ButtonArchiveJobItem}">
-        <Image Source="../Resources/Icons/Edit_32xMD.png" ToolTip="Archivierungsjob Bearbeiten" />
-      </Button>
+                <Image Source="../Resources/Icons/Edit_grey_64x.png" ToolTip="Archivierungsjob Bearbeiten" />
+            </Button>
 
-      <Button Grid.Row="1" Grid.Column="5" Style="{StaticResource ButtonArchiveJobItem}">
-        <Image Source="../Resources/Icons/Cancel_64x.png" ToolTip="Archivierungsjob löschen" Stretch="Fill" Width="20" />
-      </Button>
+            <Button Command="{Binding ElementName=ListViewArchiveJobs, Path=DataContext.DeleteArchiveJobItemCommand}" CommandParameter="{Binding .}"              
+              Grid.Row="1" Grid.Column="5" Style="{StaticResource ButtonArchiveJobItem}" >
+                <Image Source="../Resources/Icons/Cancel_64x.png" ToolTip="Archivierungsjob löschen" />
+            </Button>
 
-      <Label Content="Zielpfad:"           Grid.Row="2" Grid.Column="1" Style="{StaticResource LabelArchiveJobItemHeader}" />
-      <Label Content="{Binding SourcePath}" Grid.Row="2" Grid.Column="2" Style="{StaticResource LabelArchiveJobItemValue}" />
+            <Label Content="Zielpfad:"           Grid.Row="2" Grid.Column="1" Style="{StaticResource LabelArchiveJobItemHeader}" />
+            <Label Content="{Binding SourcePath}" Grid.Row="2" Grid.Column="2" Style="{StaticResource LabelArchiveJobItemValue}" />
 
-      <Label Content="Einstellungen:"       Grid.Row="3" Grid.Column="1" Style="{StaticResource LabelArchiveJobItemHeader}" />
-      <Label Content="{Binding ArchiveSetting}"       Grid.Row="3" Grid.Column="2" Style="{StaticResource LabelArchiveJobItemValue}" />
-      
-    </Grid>
-  </Border>
+            <Label Content="Einstellungen:"       Grid.Row="3" Grid.Column="1" Style="{StaticResource LabelArchiveJobItemHeader}" />
+            <Label Content="{Binding ArchiveSetting}"       Grid.Row="3" Grid.Column="2" Style="{StaticResource LabelArchiveJobItemValue}" />
+
+        </Grid>
+    </Border>
 </UserControl>

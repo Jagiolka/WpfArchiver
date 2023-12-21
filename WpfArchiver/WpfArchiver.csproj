@@ -8,25 +8,46 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Icons\Add_16x.png" />
+    <None Remove="Resources\Icons\Cancel_32x.png" />
+    <None Remove="Resources\Icons\Cancel_64x.png" />
+    <None Remove="Resources\Icons\Edit_32xMD.png" />
+    <None Remove="Resources\Icons\Edit_grey_64x.png" />
+    <None Remove="Resources\Icons\folder_Open_16xLG.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Remove="View\SharedStyles.xaml" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
-    <PackageReference Include="Quartz" Version="3.7.0" />
+    <PackageReference Include="Quartz" Version="3.8.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Resources\Icons\Cancel_64x.png">
+    <Resource Include="Resources\Icons\Add_16x.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Icons\Edit_grey_64x.png">
+    </Resource>
+    <Resource Include="Resources\Icons\Cancel_32x.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Resource>
+    <Resource Include="Resources\Icons\Cancel_64x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Icons\Edit_32xMD.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Icons\Edit_grey_64x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Icons\folder_Open_16xLG.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

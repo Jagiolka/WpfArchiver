@@ -1,12 +1,11 @@
-﻿namespace WpfArchiver.View
-{
-  using System.Windows.Controls;
+﻿namespace WpfArchiver.View;
 
-  public partial class ArchiveJobItemTemplate : UserControl
+using System.Windows.Controls;
+
+public partial class ArchiveJobItemTemplate : UserControl
+{
+    public ArchiveJobItemTemplate()
     {
-        public ArchiveJobItemTemplate()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
